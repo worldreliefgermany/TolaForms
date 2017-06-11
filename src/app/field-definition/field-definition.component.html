@@ -1,0 +1,27 @@
+<form>
+    <div class="form-group">
+        <div class="form-group">
+            <label for="dbname">Database Name</label>
+            <input type="text" class="form-control" id="dbname" placeholder="Database Name">
+            <p class="help-block">The name that the database uses.</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="displayname">Column Display Name</label>
+        <input type="text" class="form-control" id="displayname" placeholder="Display Name">
+        <p class="help-text">The name that users see in the table</p>
+    </div>
+    <div class="form-group">
+        <label for="columntype">Column Type</label>
+        <input type="text" class="form-control" id="columntype" placeholder="Column Type">
+        <p class="help-text">The type of data that is going to be stored in thie field</p>
+    </div>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox"> Make it a required field
+        </label>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="reset" class="btn btn-danger">Clear</button>
+</form>
