@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form-definition',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormDefinitionComponent implements OnInit {
 
-  constructor() { }
+    constructor(private router: Router, private route: ActivatedRoute ) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        console.log(this.route.snapshot.params['id']);
+    }
 
+    onFormListLoad() {
+        // this.router.navigate(['/'], { relativeTo: this.route});
+        this.router.navigate(['/']);
+    }
 }

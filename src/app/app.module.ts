@@ -10,7 +10,8 @@ import { FormListComponent } from './form-list/form-list.component';
 
 const appRoutes: Routes =  [
   { path: '', component: FormListComponent},
-  { path: 'designer', component: FormDefinitionComponent}
+  { path: 'forms', component: FormDefinitionComponent},
+  { path: 'forms/:id', component: FormDefinitionComponent }
 ];
 
 @NgModule({
