@@ -1,11 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FieldDefinitionComponent } from './field-definition/field-definition.component';
 import { FormDefinitionComponent } from './form-definition/form-definition.component';
 import { FormListComponent } from './form-list/form-list.component';
+
+const appRoutes: Routes =  [
+  { path: '', component: FormListComponent},
+  { path: 'designer', component: FormDefinitionComponent}
+];
 
 @NgModule({
   declarations: [
@@ -16,7 +22,8 @@ import { FormListComponent } from './form-list/form-list.component';
     FormListComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
