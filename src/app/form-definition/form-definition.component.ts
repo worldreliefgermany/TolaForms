@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-form-definition',
@@ -7,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./form-definition.component.css']
 })
 export class FormDefinitionComponent implements OnInit {
+    @ViewChild('f') formdef: NgForm;
 
     constructor(private router: Router, private route: ActivatedRoute ) { }
 
@@ -17,5 +19,18 @@ export class FormDefinitionComponent implements OnInit {
     onFormListLoad() {
         // this.router.navigate(['/'], { relativeTo: this.route});
         this.router.navigate(['/']);
+    }
+
+    onSubmitForm() {
+        console.log(this.formdef.value);
+    }
+
+    onResetForm() {
+        this.formdef.form.reset();
+    }
+
+
+    onDesignerOpen() {
+        console.log('openning designer...');
     }
 }

@@ -1,22 +1,35 @@
-<form>
+<form (ngSubmit)="onSubmitForm()" #f="ngForm">
     <div class="form-group">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Name">
+            <input
+                type="text"
+                class="form-control"
+                id="name"
+                name ="name"
+                ngModel
+                placeholder="Name">
             <p class="help-block">The name of the form</p>
         </div>
     </div>
     <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" id="description" rows="5"></textarea>
+        <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            rows="5"
+            ngModel>
+        </textarea>
         <p class="help-block">Describe the purpose of this form</p>
     </div>
     <div class="checkbox">
         <label>
-            <input type="checkbox"> Make it public
+            <input type="checkbox" name="public" ngModel> Make it public
         </label>
     </div>
     <button type="submit" class="btn btn-success">Save form</button>
-    <button type="reset" class="btn btn-danger">Clear form</button>
-    <button class="btn btn-default" (click)="onFormListLoad()">Go back to forms</button>
+    <button type="reset" class="btn btn-danger" (click)="onResetForm()">Clear form</button>
+    <button type="button" class="btn btn-default" (click)="onFormListLoad()">Go back to forms</button>
+    <button type="button" class="btn btn-primary" (click)='onDesignerOpen()'>Design the form</button>
 </form>
