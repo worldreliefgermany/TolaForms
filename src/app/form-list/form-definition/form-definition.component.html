@@ -1,0 +1,49 @@
+<form (ngSubmit)="onSubmitForm()" #f="ngForm" class="clearfix">
+    <div class="form-group pull-right">
+        <button type="submit" class="btn btn-success" [disabled]="!f.valid">Save form</button>
+        <button type="reset" class="btn btn-danger" [disabled]="!f.dirty" (click)="onResetForm()">Clear form</button>
+        <button type="button" class="btn btn-primary" (click)='onAddField()'>Add Field</button>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group">
+            <input
+                type="text"
+                class="form-control"
+                id="name"
+                name ="name"
+                ngModel
+                placeholder="Enter the name of the form"
+                required>
+        </div>
+    </div>
+
+</form>
+
+<div class="panel panel-default" *ngFor="let field of fields">
+    <div class="form-group">
+        <div class="panel-body">
+            <label for={{field.name}} class="col-sm-2 control-label">{{field.label}}</label>
+            <div class="col-sm-9">
+                <input
+                    class="form-control"
+                    id="{{field.name}}"
+                    name="{{field.name}}"
+                    type="{{field.type}}"
+                    placeholder="{{field.label}}">
+            </div>
+            <div class="col-sm-1 pull-right">
+                <div class="row">
+                    <span class="glyphicon glyphicon-edit" alt="Edit" aria-hidden="true"></span>
+                </div>
+                <div class="row">
+                    <span class="glyphicon glyphicon-trash" alt="Delete" aria-hidden="true" style="color: red;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr >
+
+<app-field-definition></app-field-definition>

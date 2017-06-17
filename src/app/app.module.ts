@@ -6,14 +6,16 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { FieldDefinitionComponent } from './field-definition/field-definition.component';
-import { FormDefinitionComponent } from './form-definition/form-definition.component';
+import { FieldDefinitionComponent } from './form-list/form-definition/field-definition/field-definition.component';
+import { FormDefinitionComponent } from './form-list/form-definition/form-definition.component';
 import { FormListComponent } from './form-list/form-list.component';
+
+import { FormdefService } from './shared/formdef.service';
 
 const appRoutes: Routes =  [
   { path: '', component: FormListComponent},
-  { path: 'forms', component: FormDefinitionComponent},
-  { path: 'forms/:id', component: FormDefinitionComponent }
+  { path: 'forms', component: FormListComponent},
+  { path: 'forms/:id', component: FormDefinitionComponent },
 ];
 
 @NgModule({
@@ -30,7 +32,7 @@ const appRoutes: Routes =  [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [FormdefService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
