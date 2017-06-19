@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { FormdefService } from '../../shared/formdef.service';
 import { FielddefService } from '../../shared/fielddef.service';
 
+import { Fielddef } from '../../shared/fielddef.model';
+
 @Component({
   selector: 'app-form-definition',
   templateUrl: './form-definition.component.html',
@@ -14,7 +16,7 @@ import { FielddefService } from '../../shared/fielddef.service';
 export class FormDefinitionComponent implements OnInit {
     @ViewChild('f') formdef: NgForm;
 
-    fields: {'name': string, 'label': string, 'type': string, 'required': boolean}[] = [];
+    fields: Fielddef[] = [];
 
     constructor(private router: Router,
                 private route: ActivatedRoute,

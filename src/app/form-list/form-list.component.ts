@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Formdef } from '../shared/formdef.model';
+import { Fielddef } from '../shared/fielddef.model';
+
 import { FormdefService } from '../shared/formdef.service';
 
 @Component({
@@ -8,10 +11,7 @@ import { FormdefService } from '../shared/formdef.service';
   styleUrls: ['./form-list.component.css']
 })
 export class FormListComponent implements OnInit {
-    forms: {
-            name: string,
-            fields: {name: string, label: string, type: string, required: boolean}[]
-        }[] = [];
+    forms: Formdef[] = [];
 
     constructor(private formslistService: FormdefService) { }
 
