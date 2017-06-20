@@ -12,15 +12,14 @@
                 class="form-control"
                 id="name"
                 name ="name"
-                ngModel
+                [(ngModel)]="formdata.name"
                 placeholder="Enter the name of the form"
                 required>
         </div>
     </div>
-
 </form>
 
-<div class="panel panel-default" *ngFor="let field of fields">
+<div class="panel panel-default" *ngFor="let field of formdata.fields">
     <div class="form-group">
         <div class="panel-body">
             <label for={{field.name}} class="col-sm-2 control-label">{{field.label}}</label>
@@ -46,4 +45,4 @@
 
 <hr >
 
-<app-field-definition></app-field-definition>
+<app-field-definition *ngIf="displayAddForm"></app-field-definition>

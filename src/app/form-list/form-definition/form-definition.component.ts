@@ -3,34 +3,50 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { FormdefService } from '../../shared/formdef.service';
-import { FielddefService } from '../../shared/fielddef.service';
 
 import { Fielddef } from '../../shared/fielddef.model';
+import { Formdef } from '../../shared/formdef.model';
 
 @Component({
   selector: 'app-form-definition',
   templateUrl: './form-definition.component.html',
   styleUrls: ['./form-definition.component.css'],
-  providers: [FielddefService]
 })
 export class FormDefinitionComponent implements OnInit {
     @ViewChild('f') formdef: NgForm;
-
+    formId: number;
+    formdata: Formdef;
     fields: Fielddef[] = [];
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private formdefService: FormdefService,
-                private fielddefSerivice: FielddefService ) { }
+                private formdefService: FormdefService ) { }
 
     ngOnInit() {
-        console.log('ngOnInit... ' + this.route.snapshot.params['id']);
-        this.fields = this.fielddefSerivice.fields;
+        this.formId = this.route.snapshot.params['id'];
+        if (this.formId) {
+            this.fields = this.formdefService.forms[this.formId].fields;
+            this.formdata = this.formdefService.forms[this.formId];
+            console.log(this.formdata);
+        } else {
+            this.formdata = {name: '', fields: this.fields};
+        }
+
     }
 
     onSubmitForm() {
-        this.formdefService.addFormdef(this.formdef.value.name, this.fields);
-        console.log(this.formdefService.forms);
+        if (this.formId) {
+            this.formdefService.updateFormdef(
+                this.formId,
+                this.formdef.value.name,
+                this.fields
+            );
+        } else {
+            this.formdefService.addFormdef(
+                this.formdef.value.name,
+                this.fields
+            );
+        }
     }
 
     onResetForm() {

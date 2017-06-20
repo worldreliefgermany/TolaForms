@@ -15,6 +15,7 @@ import { FormdefService } from './shared/formdef.service';
 const appRoutes: Routes =  [
   { path: '', component: FormListComponent},
   { path: 'forms', component: FormListComponent},
+  { path: 'forms/newform', component: FormDefinitionComponent},
   { path: 'forms/:id', component: FormDefinitionComponent },
 ];
 

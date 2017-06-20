@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Fielddef } from './fielddef.model';
+
 @Injectable()
 export class FormdefService {
     forms = [
@@ -24,12 +26,14 @@ export class FormdefService {
 
     addFormdef(name: string, fields: {name: string, label: string, type: string, required: boolean}[]) {
         this.forms.push({name: name, fields: fields});
-        console.log('formdef created and pushed to forms array!');
     }
 
 
-    updateFormdef(id: number, name: string, fields: [{name: string, label: string, type: string, required: boolean}]) {
+    updateFormdef(id: number, name: string, fields: {name: string, label: string, type: string, required: boolean}[]) {
         this.forms[id] = {name: name, fields: fields};
-        console.log('formdef updated!');
+    }
+
+    addFielddef(id: number, fielddef: Fielddef) {
+        this.forms[id].fields.push(fielddef);
     }
 }
