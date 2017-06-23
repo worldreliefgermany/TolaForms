@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -15,8 +15,9 @@ import { Formdef } from '../../shared/formdef.model';
 export class FormDefinitionComponent implements OnInit {
     @ViewChild('f') formdef: NgForm;
     formId: number;
-    formdata: Formdef;
     fields: Fielddef[] = [];
+    formdata: Formdef = {name: '', fields: this.fields};
+    displayForm = false;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -27,11 +28,9 @@ export class FormDefinitionComponent implements OnInit {
         if (this.formId) {
             this.fields = this.formdefService.forms[this.formId].fields;
             this.formdata = this.formdefService.forms[this.formId];
-            console.log(this.formdata);
         } else {
             this.formdata = {name: '', fields: this.fields};
         }
-
     }
 
     onSubmitForm() {
@@ -46,10 +45,21 @@ export class FormDefinitionComponent implements OnInit {
                 this.formdef.value.name,
                 this.fields
             );
+            this.formId = this.formdefService.forms.length - 1;
         }
+        this.router.navigate(['/forms', this.formId]);
     }
 
     onResetForm() {
         this.formdef.form.reset();
+    }
+    toggleAddForm(toggleFlag) {
+        console.log(toggleFlag);
+        if (toggleFlag !== undefined) {
+            this.displayForm = toggleFlag;
+        } else {
+            this.displayForm = !this.displayForm;
+        }
+
     }
 }

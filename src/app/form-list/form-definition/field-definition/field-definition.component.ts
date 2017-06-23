@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -14,7 +14,7 @@ export class FieldDefinitionComponent implements OnInit {
 
     @ViewChild('f') fielddef: NgForm;
     id: number;
-    @Input() displayAddForm = false;
+    @Output() displayAddForm = new EventEmitter<boolean>();
 
     constructor(private route: ActivatedRoute,
                 private formdefService: FormdefService) { }
@@ -23,15 +23,19 @@ export class FieldDefinitionComponent implements OnInit {
         this.id = this.route.snapshot.params['id'];
     }
 
-    onAddField() {
-        const fielddef = {
+    onAddField(addAnother: boolean) {
+        const field = {
             name: this.fielddef.value.name,
             label: this.fielddef.value.label,
             type: this.fielddef.value.type,
             required: this.fielddef.value.required
         }
-        this.formdefService.addFielddef(this.id, fielddef);
-        console.log(this.formdefService.forms[this.id].fields);
+        this.formdefService.addFielddef(this.id, field);
         this.fielddef.reset();
+        if (addAnother === true) {
+            this.displayAddForm.emit(true);
+        } else {
+            this.displayAddForm.emit(false);
+        }
     }
 }

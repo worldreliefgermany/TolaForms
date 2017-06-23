@@ -1,7 +1,7 @@
 <div class="panel panel-primary" #newFieldBlock>
     <div class="panel-heading">Adding new field to the form</div>
     <div class="panel-body">
-        <form (ngSubmit)="onAddField()" #f="ngForm">
+        <form (ngSubmit)="onAddField(false)" #f="ngForm">
             <div class="form-group">
                 <div class="form-group">
                     <input
@@ -39,7 +39,8 @@
             </div>
             <div class="clearfix">
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-success">Add Field</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-success" (click)="onAddField(true)">Save and add another</button>
                     <button type="reset" class="btn btn-danger">Cancel</button>
                 </div>
             </div>
