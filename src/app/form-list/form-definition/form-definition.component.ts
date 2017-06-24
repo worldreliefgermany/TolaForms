@@ -17,7 +17,7 @@ export class FormDefinitionComponent implements OnInit {
     formId: number;
     fields: Fielddef[] = [];
     formdata: Formdef = {name: '', fields: this.fields};
-    displayForm = false;
+    displayAddFieldForm = false;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -56,9 +56,9 @@ export class FormDefinitionComponent implements OnInit {
     toggleAddForm(toggleFlag) {
         console.log(toggleFlag);
         if (toggleFlag !== undefined) {
-            this.displayForm = toggleFlag;
+            this.displayAddFieldForm = toggleFlag;
         } else {
-            this.displayForm = !this.displayForm;
+            this.displayAddFieldForm = !this.displayAddFieldForm;
         }
 
     }

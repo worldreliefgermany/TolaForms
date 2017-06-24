@@ -12,30 +12,31 @@ import { Fielddef } from '../../../shared/fielddef.model';
 })
 export class FieldDefinitionComponent implements OnInit {
 
-    @ViewChild('f') fielddef: NgForm;
-    id: number;
+    @ViewChild('f') fieldAddForm: NgForm;
+    formId: number;
     @Output() displayAddForm = new EventEmitter<boolean>();
 
     constructor(private route: ActivatedRoute,
                 private formdefService: FormdefService) { }
 
     ngOnInit() {
-        this.id = this.route.snapshot.params['id'];
+        this.formId = this.route.snapshot.params['id'];
     }
 
     onAddField(addAnother: boolean) {
-        const field = {
-            name: this.fielddef.value.name,
-            label: this.fielddef.value.label,
-            type: this.fielddef.value.type,
-            required: this.fielddef.value.required
-        }
-        this.formdefService.addFielddef(this.id, field);
-        this.fielddef.reset();
-        if (addAnother === true) {
-            this.displayAddForm.emit(true);
-        } else {
-            this.displayAddForm.emit(false);
-        }
+        const field = new Fielddef(
+            this.fieldAddForm.value.name,
+            this.fieldAddForm.value.label,
+            this.fieldAddForm.value.type,
+            this.fieldAddForm.value.required
+            );
+        this.formdefService.addFielddef(this.formId, field);
+        this.fieldAddForm.reset();
+        this.displayAddForm.emit(addAnother);
+    }
+
+    resetAddForm() {
+        this.fieldAddForm.reset();
+        this.displayAddForm.emit(false);
     }
 }
