@@ -7,6 +7,8 @@ export class FormdefService {
     forms = [
         {
             name: 'My Test Form 1',
+            description: 'This the description for form # 1',
+            isPublic: false,
             fields: [
                 {name: 'name', label: 'What is your name?', type: 'text', required: true},
                 {name: 'age', label: 'How old are you?', type: 'number', required: false},
@@ -15,6 +17,8 @@ export class FormdefService {
         },
         {
             name: 'Your Test Form 2',
+            description: 'This is some description for why this form exists',
+            isPublic: true,
             fields: [
                 {name: 'dob', label: 'Date of Birth', type: 'date', required: true},
                 {name: 'dept', label: 'Department', type: 'number', required: false},
@@ -24,13 +28,31 @@ export class FormdefService {
         }
     ];
 
-    addFormdef(name: string, fields: {name: string, label: string, type: string, required: boolean}[]) {
-        this.forms.push({name: name, fields: fields});
+    addFormdef(
+        name: string,
+        description: string,
+        isPublic: boolean,
+        fields: {name: string, label: string, type: string, required: boolean}[]) {
+        this.forms.push({
+            name: name,
+            description: description,
+            isPublic: isPublic,
+            fields: fields}
+        );
     }
 
 
-    updateFormdef(id: number, name: string, fields: {name: string, label: string, type: string, required: boolean}[]) {
-        this.forms[id] = {name: name, fields: fields};
+    updateFormdef(
+        id: number,
+        name: string,
+        description: string,
+        isPublic: boolean, fields: {name: string, label: string, type: string, required: boolean}[]) {
+        this.forms[id] = {
+            name: name,
+            description: description,
+            isPublic: isPublic,
+            fields: fields
+        };
     }
 
     addFielddef(id: number, fielddef: Fielddef) {

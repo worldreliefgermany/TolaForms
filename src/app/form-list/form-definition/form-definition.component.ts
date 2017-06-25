@@ -16,7 +16,7 @@ export class FormDefinitionComponent implements OnInit {
     @ViewChild('f') formdef: NgForm;
     formId: number;
     fields: Fielddef[] = [];
-    formdata: Formdef = {name: '', fields: this.fields};
+    formdata: Formdef = {name: '', description: '', isPublic: false, fields: this.fields};
     displayAddFieldForm = false;
 
     constructor(private router: Router,
@@ -29,7 +29,7 @@ export class FormDefinitionComponent implements OnInit {
             this.fields = this.formdefService.forms[this.formId].fields;
             this.formdata = this.formdefService.forms[this.formId];
         } else {
-            this.formdata = {name: '', fields: this.fields};
+            this.formdata = {name: '', description: '', isPublic: false, fields: this.fields};
         }
     }
 
@@ -38,11 +38,15 @@ export class FormDefinitionComponent implements OnInit {
             this.formdefService.updateFormdef(
                 this.formId,
                 this.formdef.value.name,
+                this.formdef.value.description,
+                this.formdef.value.isPublic,
                 this.fields
             );
         } else {
             this.formdefService.addFormdef(
                 this.formdef.value.name,
+                this.formdef.value.description,
+                this.formdef.value.isPublic,
                 this.fields
             );
             this.formId = this.formdefService.forms.length - 1;
