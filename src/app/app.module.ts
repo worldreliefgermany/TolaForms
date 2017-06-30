@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { DndModule } from 'ng2-dnd';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FieldDefinitionComponent } from './form-list/form-definition/field-definition/field-definition.component';
@@ -31,6 +33,7 @@ const appRoutes: Routes =  [
     BrowserModule,
     FormsModule,
     HttpModule,
+    DndModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
   providers: [FormdefService],

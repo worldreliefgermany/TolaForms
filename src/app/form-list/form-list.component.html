@@ -1,7 +1,9 @@
 <div class="panel panel-default" *ngFor="let form of forms">
-    <div class="panel-heading"><a [routerLink]="['/forms', forms.indexOf(form) ]">{{ form.name }}</a></div>
+    <div class="panel-heading clearfix">
+        <a [routerLink]="['/forms', forms.indexOf(form) ]">{{ form.name }}</a>
+    </div>
     <div class="panel-body">
-        <p>Click to expand the fields definitions here...</p>
-        <!-- <app-form-definition></app-form-definition> -->
+        <p>{{ form.description }}</p>
+
     </div>
 </div>

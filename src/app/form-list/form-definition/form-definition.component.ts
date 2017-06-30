@@ -66,4 +66,9 @@ export class FormDefinitionComponent implements OnInit {
         }
 
     }
+
+    transferDataSuccess($event: any) {
+        console.log($event);
+        console.log(this.formdata.fields);
+    }
 }
