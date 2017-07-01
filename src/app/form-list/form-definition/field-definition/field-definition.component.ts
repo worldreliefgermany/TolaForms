@@ -28,7 +28,8 @@ export class FieldDefinitionComponent implements OnInit {
             this.fieldAddForm.value.name,
             this.fieldAddForm.value.label,
             this.fieldAddForm.value.type,
-            this.fieldAddForm.value.required
+            this.fieldAddForm.value.required,
+            this.fieldAddForm.value.order,
             );
         this.formdefService.addFielddef(this.formId, field);
         this.fieldAddForm.reset();

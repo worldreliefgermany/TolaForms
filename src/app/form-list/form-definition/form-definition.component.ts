@@ -58,7 +58,6 @@ export class FormDefinitionComponent implements OnInit {
         this.formdef.form.reset();
     }
     toggleAddForm(toggleFlag) {
-        console.log(toggleFlag);
         if (toggleFlag !== undefined) {
             this.displayAddFieldForm = toggleFlag;
         } else {
@@ -67,8 +66,12 @@ export class FormDefinitionComponent implements OnInit {
 
     }
 
-    transferDataSuccess($event: any) {
-        console.log($event);
-        console.log(this.formdata.fields);
+    onDragAndDropFields($event: any) {
+        // update the order value of fields as per user's drag and drop
+        this.formdata.fields.forEach((item, index) => {
+            item.order = index;
+        });
+        this.fields = this.formdata.fields;
+        this.onSubmitForm();
     }
 }

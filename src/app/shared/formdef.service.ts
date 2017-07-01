@@ -10,9 +10,9 @@ export class FormdefService {
             description: 'This the description for form # 1',
             isPublic: false,
             fields: [
-                {name: 'name', label: 'What is your name?', type: 'text', required: true},
-                {name: 'age', label: 'How old are you?', type: 'number', required: false},
-                {name: 'gender', label: 'What is your gender?', type: 'text', required: true},
+                {name: 'name', label: 'What is your name?', type: 'text', required: true, order: 0},
+                {name: 'age', label: 'How old are you?', type: 'number', required: false, order: 1},
+                {name: 'gender', label: 'What is your gender?', type: 'text', required: true, order: 2},
             ]
         },
         {
@@ -20,10 +20,10 @@ export class FormdefService {
             description: 'This is some description for why this form exists',
             isPublic: true,
             fields: [
-                {name: 'dob', label: 'Date of Birth', type: 'date', required: true},
-                {name: 'dept', label: 'Department', type: 'number', required: false},
-                {name: 'title', label: 'Title', type: 'text', required: true},
-                {name: 'experience', label: 'What is your level of experience?', type: 'text', required: true},
+                {name: 'dob', label: 'Date of Birth', type: 'date', required: true, order: 0},
+                {name: 'dept', label: 'Department', type: 'number', required: false, order: 1},
+                {name: 'title', label: 'Title', type: 'text', required: true, order: 2},
+                {name: 'experience', label: 'What is your level of experience?', type: 'text', required: true, order: 3},
             ]
         }
     ];
@@ -32,7 +32,7 @@ export class FormdefService {
         name: string,
         description: string,
         isPublic: boolean,
-        fields: {name: string, label: string, type: string, required: boolean}[]) {
+        fields: {name: string, label: string, type: string, required: boolean, order: number}[]) {
         this.forms.push({
             name: name,
             description: description,
@@ -46,7 +46,7 @@ export class FormdefService {
         id: number,
         name: string,
         description: string,
-        isPublic: boolean, fields: {name: string, label: string, type: string, required: boolean}[]) {
+        isPublic: boolean, fields: {name: string, label: string, type: string, required: boolean, order: number}[]) {
         this.forms[id] = {
             name: name,
             description: description,

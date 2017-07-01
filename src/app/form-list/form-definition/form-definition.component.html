@@ -43,7 +43,7 @@
     </div>
     <div class="panel-body">
         <ul class="list-group" dnd-sortable-container [sortableData]="formdata.fields">
-            <li *ngFor="let field of formdata.fields; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dragData]="i" (onDropSuccess)="transferDataSuccess($event)">
+            <li *ngFor="let field of formdata.fields; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dragData]="i" (onDropSuccess)="onDragAndDropFields($event)">
                 <div class="row">
                     <label for={{field.name}} class="col-sm-2 control-label">{{field.label}}</label>
                     <div class="col-sm-9">
