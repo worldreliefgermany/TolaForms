@@ -13,6 +13,7 @@ import { FormDefinitionComponent } from './form-list/form-definition/form-defini
 import { FormListComponent } from './form-list/form-list.component';
 
 import { FormdefService } from './shared/formdef.service';
+import { FieldListComponent } from './form-list/form-definition/field-list/field-list.component';
 
 const appRoutes: Routes =  [
   { path: '', component: FormListComponent},
@@ -28,6 +29,7 @@ const appRoutes: Routes =  [
     FieldDefinitionComponent,
     FormDefinitionComponent,
     FormListComponent,
+    FieldListComponent,
   ],
   imports: [
     BrowserModule,

@@ -42,11 +42,9 @@ export class FormdefService {
     }
 
 
-    updateFormdef(
-        id: number,
-        name: string,
-        description: string,
-        isPublic: boolean, fields: {name: string, label: string, type: string, required: boolean, order: number}[]) {
+    updateFormdef( id: number, name: string, description: string, isPublic: boolean,
+        fields: { name: string, label: string, type: string, required: boolean, order: number }[])
+    {
         this.forms[id] = {
             name: name,
             description: description,

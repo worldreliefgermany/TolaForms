@@ -66,12 +66,17 @@ export class FormDefinitionComponent implements OnInit {
 
     }
 
-    onDragAndDropFields($event: any) {
-        // update the order value of fields as per user's drag and drop
-        this.formdata.fields.forEach((item, index) => {
-            item.order = index;
-        });
-        this.fields = this.formdata.fields;
+    updateFieldList($event: any) {
+        this.fields = $event;
         this.onSubmitForm();
     }
+
+    // onDragAndDropFields($event: any) {
+    //     // update the order value of fields as per user's drag and drop
+    //     this.formdata.fields.forEach((item, index) => {
+    //         item.order = index;
+    //     });
+    //     this.fields = this.formdata.fields;
+    //     this.onSubmitForm();
+    // }
 }
