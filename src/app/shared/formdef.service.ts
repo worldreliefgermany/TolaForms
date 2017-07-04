@@ -9,6 +9,7 @@ export class FormdefService {
             name: 'My Test Form 1',
             description: 'This the description for form # 1',
             isPublic: false,
+            displayFields: true,
             fields: [
                 {name: 'name', label: 'What is your name?', type: 'text', required: true, order: 0},
                 {name: 'age', label: 'How old are you?', type: 'number', required: false, order: 1},
@@ -19,6 +20,7 @@ export class FormdefService {
             name: 'Your Test Form 2',
             description: 'This is some description for why this form exists',
             isPublic: true,
+            displayFields: true,
             fields: [
                 {name: 'dob', label: 'Date of Birth', type: 'date', required: true, order: 0},
                 {name: 'dept', label: 'Department', type: 'number', required: false, order: 1},
@@ -37,18 +39,19 @@ export class FormdefService {
             name: name,
             description: description,
             isPublic: isPublic,
+            displayFields: true,
             fields: fields}
         );
     }
 
 
     updateFormdef( id: number, name: string, description: string, isPublic: boolean,
-        fields: { name: string, label: string, type: string, required: boolean, order: number }[])
-    {
+        fields: { name: string, label: string, type: string, required: boolean, order: number }[]) {
         this.forms[id] = {
             name: name,
             description: description,
             isPublic: isPublic,
+            displayFields: true,
             fields: fields
         };
     }

@@ -1,9 +1,14 @@
 <div class="panel panel-default" *ngFor="let form of forms">
     <div class="panel-heading clearfix">
         <a [routerLink]="['/forms', forms.indexOf(form) ]">{{ form.name }}</a>
+        <button
+            class="btn btn-default pull-right"
+            (click)="form.displayFields = !form.displayFields">Preview</button>
     </div>
     <div class="panel-body">
         <p>{{ form.description }}</p>
-
+        <app-field-list [fields]="form.fields" [ngClass]="{hide_element: form.displayFields}" *ngIf="form.fields.length>0">
+            <p class="hrtext"><span>List of Fields</span></p>
+        </app-field-list>
     </div>
 </div>

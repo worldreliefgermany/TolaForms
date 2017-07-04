@@ -1,31 +1,27 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4>Fields</h4>
-    </div>
-    <div class="panel-body">
-        <ul class="list-group" dnd-sortable-container [sortableData]="fields">
-            <li *ngFor="let field of fields; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dragData]="i" (onDropSuccess)="onDragAndDropFields($event)">
-                <div class="row">
-                    <label for={{field.name}} class="col-sm-2 control-label">{{field.label}}</label>
-                    <div class="col-sm-9">
-                        <input
-                            class="form-control"
-                            id="{{field.name}}"
-                            name="{{field.name}}"
-                            type="{{field.type}}"
-                            placeholder="{{field.label}}">
-                    </div>
-                    <div class="col-sm-1 pull-right">
-                        <div class="row">
-                            <span class="glyphicon glyphicon-edit" alt="Edit" aria-hidden="true"></span>
-                        </div>
-                        <div class="row">
-                            <span class="glyphicon glyphicon-trash" alt="Delete" aria-hidden="true" style="color: red;"></span>
-                        </div>
-                    </div>
-                </div>
+<ng-content></ng-content>
 
-            </li>
-        </ul>
-    </div>
-</div>
+<ul class="list-group" dnd-sortable-container [sortableData]="fields">
+    <li *ngFor="let field of fields; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dragData]="i" (onDropSuccess)="onDragAndDropFields($event)">
+        <div class="row">
+            <label for={{field.name}} class="col-sm-2 control-label">{{field.label}}</label>
+            <div class="col-sm-9">
+                <input
+                    class="form-control"
+                    id="{{field.name}}"
+                    name="{{field.name}}"
+                    type="{{field.type}}"
+                    placeholder="{{field.label}}">
+            </div>
+
+            <div class="col-sm-1 pull-right" *ngIf="edit_mode===true">
+                <div class="row">
+                    <span class="glyphicon glyphicon-edit" alt="Edit" aria-hidden="true"></span>
+                </div>
+                <div class="row">
+                    <span class="glyphicon glyphicon-trash" alt="Delete" aria-hidden="true" style="color: red;"></span>
+                </div>
+            </div>
+        </div>
+
+    </li>
+</ul>

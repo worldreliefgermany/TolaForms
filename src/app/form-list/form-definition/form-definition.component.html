@@ -37,8 +37,15 @@
     </div>
 </form>
 
-<app-field-list (fieldlist)="updateFieldList($event)" [fields]="formdata.fields"></app-field-list>
-
+<app-field-list
+    (fieldlist)="updateFieldList($event)"
+    [fields]="formdata.fields"
+    [edit_mode]="true"
+    *ngIf="formdata.fields.length>0">
+    <p class="hrtext"><span>List of Fields</span></p>
+</app-field-list>
 <hr >
-
-<app-field-definition (displayAddForm)="toggleAddForm($event)" *ngIf="displayAddFieldForm"></app-field-definition>
+<app-field-definition
+    (displayAddForm)="toggleAddForm($event)"
+    *ngIf="displayAddFieldForm">
+</app-field-definition>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Formdef } from '../shared/formdef.model';
 import { Fielddef } from '../shared/fielddef.model';
@@ -8,7 +8,8 @@ import { FormdefService } from '../shared/formdef.service';
 @Component({
   selector: 'app-form-list',
   templateUrl: './form-list.component.html',
-  styleUrls: ['./form-list.component.css']
+  styleUrls: ['./form-list.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FormListComponent implements OnInit {
     forms: Formdef[] = [];

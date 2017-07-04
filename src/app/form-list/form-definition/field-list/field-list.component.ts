@@ -10,7 +10,8 @@ import { Fielddef } from '../../../shared/fielddef.model';
 export class FieldListComponent implements OnInit {
 
     @Input() fields: Fielddef[];
-    @Output() fieldlist = new EventEmitter<Fielddef[]>();
+    @Output() fieldlist: EventEmitter<Fielddef[]> = new EventEmitter<Fielddef[]>();
+    @Input() edit_mode = false;
 
     constructor() { }
 
