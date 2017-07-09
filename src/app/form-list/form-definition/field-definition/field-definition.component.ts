@@ -24,13 +24,16 @@ export class FieldDefinitionComponent implements OnInit {
     }
 
     onAddField(addAnother: boolean) {
+        const newFieldId = this.formdefService.forms[this.formId].fields.length + 1;
         const field = new Fielddef(
+            newFieldId,
             this.fieldAddForm.value.name,
             this.fieldAddForm.value.label,
             this.fieldAddForm.value.type,
             this.fieldAddForm.value.required,
             this.fieldAddForm.value.order,
             );
+        // console.log('The fields length is: ' + this.formdefService.forms[this.formId].fields.length);
         this.formdefService.addFielddef(this.formId, field);
         this.fieldAddForm.reset();
         this.displayAddForm.emit(addAnother);

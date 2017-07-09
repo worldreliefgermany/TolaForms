@@ -1,5 +1,6 @@
 export class Fielddef {
     constructor(
+        public id: number,
         public name: string,
         public label: string,
         public type: string,

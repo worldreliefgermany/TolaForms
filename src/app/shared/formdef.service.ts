@@ -11,9 +11,9 @@ export class FormdefService {
             isPublic: false,
             displayFields: true,
             fields: [
-                {name: 'name', label: 'What is your name?', type: 'text', required: true, order: 0},
-                {name: 'age', label: 'How old are you?', type: 'number', required: false, order: 1},
-                {name: 'gender', label: 'What is your gender?', type: 'text', required: true, order: 2},
+                new Fielddef(1, 'name', 'What is your name?', 'text', true, 0),
+                new Fielddef(2, 'age', 'How old are you?', 'number', false, 1),
+                new Fielddef(3, 'gender', 'What is your gender?', 'text', true, 2),
             ]
         },
         {
@@ -22,37 +22,21 @@ export class FormdefService {
             isPublic: true,
             displayFields: true,
             fields: [
-                {name: 'dob', label: 'Date of Birth', type: 'date', required: true, order: 0},
-                {name: 'dept', label: 'Department', type: 'number', required: false, order: 1},
-                {name: 'title', label: 'Title', type: 'text', required: true, order: 2},
-                {name: 'experience', label: 'What is your level of experience?', type: 'text', required: true, order: 3},
+                new Fielddef(1, 'dob', 'Date of Birth', 'date', true, 0),
+                new Fielddef(2, 'dept', 'Department', 'number', false, 1),
+                new Fielddef(3, 'title', 'Title', 'text', true, 2),
+                new Fielddef(4, 'experience', 'What is your level of experience?', 'text', true, 3),
             ]
         }
     ];
 
-    addFormdef(
-        name: string,
-        description: string,
-        isPublic: boolean,
-        fields: {name: string, label: string, type: string, required: boolean, order: number}[]) {
-        this.forms.push({
-            name: name,
-            description: description,
-            isPublic: isPublic,
-            displayFields: true,
-            fields: fields}
-        );
+    addFormdef(name: string, description: string, isPublic: boolean, fields: Fielddef[]) {
+        this.forms.push({ name: name, description: description, isPublic: isPublic, displayFields: true, fields: fields});
     }
 
 
-    updateFormdef( id: number, name: string, description: string, isPublic: boolean,
-        fields: { name: string, label: string, type: string, required: boolean, order: number }[]) {
-        this.forms[id] = {
-            name: name,
-            description: description,
-            isPublic: isPublic,
-            displayFields: true,
-            fields: fields
+    updateFormdef( id: number, name: string, description: string, isPublic: boolean, fields: Fielddef[]) {
+        this.forms[id] = { name: name, description: description, isPublic: isPublic, displayFields: true, fields: fields
         };
     }
 
