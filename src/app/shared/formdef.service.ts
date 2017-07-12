@@ -41,6 +41,15 @@ export class FormdefService {
     }
 
     addFielddef(id: number, fielddef: Fielddef) {
+        console.log(fielddef);
         this.forms[id].fields.push(fielddef);
+    }
+
+
+    updateFielddef(id: number, fieldId: number, fielddef: Fielddef) {
+        console.log('num of fields in the form: ' + this.forms[id].fields.length);
+        console.log('fieldId to be updated ' + ( fieldId - 1) );
+        // console.log('index at which field to be updated = ' + fieldId - 1);
+        this.forms[id].fields[fieldId - 1] = fielddef;
     }
 }

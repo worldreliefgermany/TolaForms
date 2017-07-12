@@ -1,5 +1,5 @@
 <div class="panel panel-primary" #newFieldBlock>
-    <div class="panel-heading">Adding new field to the form</div>
+    <div class="panel-heading"><ng-content></ng-content></div>
     <div class="panel-body">
         <form (ngSubmit)="onAddField(false)" #f="ngForm">
             <div class="form-group">
@@ -10,7 +10,7 @@
                         id="name"
                         name="name"
                         placeholder="Field name"
-                        ngModel>
+                        [(ngModel)]="fieldToBeEdited.name">
                 </div>
             </div>
             <div class="form-group">
@@ -20,10 +20,10 @@
                     id="label"
                     name="label"
                     placeholder="Field Label"
-                    ngModel>
+                    [(ngModel)]="fieldToBeEdited.label">
             </div>
             <div class="form-group">
-                <select id="type" class="form-control" name="type" ngModel>
+                <select id="type" class="form-control" name="type" [(ngModel)]="fieldToBeEdited.type">
                     <option value="text">Text</option>
                     <option value="number">Number</option>
                     <option value="date">Date</option>
@@ -34,14 +34,17 @@
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="required" ngModel> Field required
+                    <input type="checkbox" name="required" [(ngModel)]="fieldToBeEdited.required"> Field required
                 </label>
             </div>
             <div class="clearfix">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-success">Save</button>
+                <div class="pull-right" *ngIf="fieldToBeEdited.id === -1">
+                    <button type="submit" class="btn btn-success">Add</button>
                     <button type="button" class="btn btn-success" (click)="onAddField(true)">Save and add another</button>
                     <button type="reset" class="btn btn-danger" (click)="resetAddForm()">Cancel</button>
+                </div>
+                <div class="pull-right" *ngIf="fieldToBeEdited.id !== -1 ">
+                    <button type="button" (click)="onUpdateField()" class="btn btn-success">Update</button>
                 </div>
             </div>
         </form>

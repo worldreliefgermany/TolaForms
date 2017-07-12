@@ -11,17 +11,30 @@
                     name="{{field.name}}"
                     type="{{field.type}}"
                     placeholder="{{field.label}}">
+
+                <app-field-definition
+                    [fieldToBeEdited]="field"
+                    (displayEditForm)="toggleEditForm($event)"
+                    [ngClass]="{hide_element: field.id !== fieldIndexToEdit }">
+                    <span>Editing field</span>
+                </app-field-definition>
             </div>
 
             <div class="col-sm-1 pull-right" *ngIf="edit_mode===true">
                 <div class="row">
-                    <span class="glyphicon glyphicon-edit" alt="Edit" aria-hidden="true"></span>
+                    <a (click)="fieldIndexToEdit = (fieldIndexToEdit === field.id) ? -1 : field.id">
+                        <span class="glyphicon glyphicon-edit" alt="Edit" aria-hidden="true"></span>
+                    </a>
                 </div>
                 <div class="row">
-                    <span class="glyphicon glyphicon-trash" alt="Delete" aria-hidden="true" style="color: red;"></span>
+                    <a (click)="onDeleteField(field)">
+                        <span class="glyphicon glyphicon-trash" alt="Delete" aria-hidden="true" style="color: red;"></span>
+                    </a>
                 </div>
             </div>
         </div>
-
     </li>
 </ul>
+
+
+

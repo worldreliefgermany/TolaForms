@@ -58,6 +58,10 @@ export class FormDefinitionComponent implements OnInit {
         this.formdef.form.reset();
     }
     toggleAddForm(toggleFlag) {
+        // this.displayAddFieldForm = (toggleFlag !== undefined) ?
+        //     this.displayAddFieldForm = toggleFlag :
+        //     this.displayAddFieldForm = !this.displayAddFieldForm;
+
         if (toggleFlag !== undefined) {
             this.displayAddFieldForm = toggleFlag;
         } else {
