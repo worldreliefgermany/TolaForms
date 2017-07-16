@@ -16,7 +16,7 @@ export class FormDefinitionComponent implements OnInit {
     @ViewChild('f') formdef: NgForm;
     formId: number;
     fields: Fielddef[] = [];
-    formdata: Formdef = {name: '', description: '', isPublic: false, fields: this.fields};
+    formdata: Formdef = {id: -1, name: '', description: '', isPublic: false, fields: this.fields};
     displayAddFieldForm = false;
 
     constructor(private router: Router,
@@ -29,7 +29,7 @@ export class FormDefinitionComponent implements OnInit {
             this.fields = this.formdefService.forms[this.formId].fields;
             this.formdata = this.formdefService.forms[this.formId];
         } else {
-            this.formdata = {name: '', description: '', isPublic: false, fields: this.fields};
+            this.formdata = {id: -1, name: '', description: '', isPublic: false, fields: this.fields};
         }
     }
 
@@ -73,6 +73,14 @@ export class FormDefinitionComponent implements OnInit {
     updateFieldList($event: any) {
         this.fields = $event;
         this.onSubmitForm();
+    }
+
+    saveFormRemotely(index: number) {
+        this.formdefService.saveFormRemotely(index)
+            .subscribe(
+                (response) => console.log(response),
+                (error) => console.log(error)
+            );
     }
 
     // onDragAndDropFields($event: any) {

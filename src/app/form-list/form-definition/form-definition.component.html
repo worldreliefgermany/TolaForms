@@ -1,6 +1,7 @@
 <form (ngSubmit)="onSubmitForm()" #f="ngForm" class="clearfix">
     <div class="form-group pull-right">
         <button type="submit" class="btn btn-success" [disabled]="!f.valid">Save form</button>
+        <button type="button" (click)="saveFormRemotely(1)" class="btn btn-default">Save Remotely </button>
         <button type="reset" class="btn btn-danger" [disabled]="!f.dirty" (click)="onResetForm()">Clear form</button>
         <button type="button" class="btn btn-primary" [disabled]="!formId" (click)="toggleAddForm()">Add Field</button>
     </div>

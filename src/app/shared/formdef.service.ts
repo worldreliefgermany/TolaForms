@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
 
 import { Fielddef } from './fielddef.model';
 
 @Injectable()
 export class FormdefService {
+
     forms = [
         {
+            id: 1,
             name: 'My Test Form 1',
             description: 'This the description for form # 1',
             isPublic: false,
@@ -17,6 +20,7 @@ export class FormdefService {
             ]
         },
         {
+            id: 2,
             name: 'Your Test Form 2',
             description: 'This is some description for why this form exists',
             isPublic: true,
@@ -30,25 +34,38 @@ export class FormdefService {
         }
     ];
 
+    constructor(private http: Http) {}
+
+    // http://dev-v2.tolaactivity.app.tola.io/api/fieldtype/
+    // http://dev-v2.tolaactivity.app.tola.io/api/customformfield/
+    // http://dev-v2.tolaactivity.app.tola.io/api/customform/
+
+    saveFormRemotely(index: number) {
+        const url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/';
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Token xxxxx'});
+        return this.http.post(url, this.forms[index], {headers: headers});
+    }
+
     addFormdef(name: string, description: string, isPublic: boolean, fields: Fielddef[]) {
-        this.forms.push({ name: name, description: description, isPublic: isPublic, displayFields: true, fields: fields});
+        this.forms.push({id: null, name: name, description: description, isPublic: isPublic, displayFields: true, fields: fields});
     }
 
 
     updateFormdef( id: number, name: string, description: string, isPublic: boolean, fields: Fielddef[]) {
-        this.forms[id] = { name: name, description: description, isPublic: isPublic, displayFields: true, fields: fields
-        };
+        this.forms[id] = {id: id, name: name, description: description, isPublic: isPublic, displayFields: true, fields: fields};
     }
 
     addFielddef(id: number, fielddef: Fielddef) {
-        console.log(fielddef);
+        fielddef.order = this.forms[id].fields.length;
         this.forms[id].fields.push(fielddef);
     }
 
 
     updateFielddef(id: number, fieldId: number, fielddef: Fielddef) {
-        console.log('num of fields in the form: ' + this.forms[id].fields.length);
-        console.log('fieldId to be updated ' + ( fieldId - 1) );
+        // console.log('num of fields in the form: ' + this.forms[id].fields.length);
+        // console.log('fieldId to be updated ' + ( fieldId - 1) );
         // console.log('index at which field to be updated = ' + fieldId - 1);
         this.forms[id].fields[fieldId - 1] = fielddef;
     }
