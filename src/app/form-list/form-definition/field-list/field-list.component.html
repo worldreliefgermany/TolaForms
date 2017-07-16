@@ -10,6 +10,7 @@
                     id="{{field.name}}"
                     name="{{field.name}}"
                     type="{{field.type}}"
+                    [attr.accept]="field.type === 'file' ? 'image/*' : null"
                     placeholder="{{field.label}}">
 
                 <app-field-definition
