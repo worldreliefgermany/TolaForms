@@ -5,6 +5,7 @@ export class Fielddef {
         public label: string,
         public type: string,
         public required: boolean,
-        public order: number
+        public order: number,
+        public options: string
     ) {}
 }

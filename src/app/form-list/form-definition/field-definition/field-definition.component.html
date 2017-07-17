@@ -23,13 +23,16 @@
                     [(ngModel)]="fieldToBeEdited.label">
             </div>
             <div class="form-group">
-                <select id="type" class="form-control" name="type" [(ngModel)]="fieldToBeEdited.type">
-                    <option value="text">Text</option>
-                    <option value="number">Number</option>
-                    <option value="date">Date</option>
-                    <option value="email">Email</option>
-                    <option value="url">URL</option>
-                    <option value="file">Image</option>
+                <select id="type" class="form-control" name="type"
+                    [(ngModel)]="fieldToBeEdited.type"
+                    (change)="onFiledTypeChange($event)">
+                        <option value="text">Text</option>
+                        <option value="number">Number</option>
+                        <option value="date">Date</option>
+                        <option value="email">Email</option>
+                        <option value="url">URL</option>
+                        <option value="file">Image</option>
+                        <option value="select">Dropdown</option>
                 </select>
             </div>
 

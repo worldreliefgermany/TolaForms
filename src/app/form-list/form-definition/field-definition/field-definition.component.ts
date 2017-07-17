@@ -24,8 +24,12 @@ export class FieldDefinitionComponent implements OnInit {
     ngOnInit() {
         this.formId = this.route.snapshot.params['id'];
         if (!this.hasOwnProperty('fieldToBeEdited') ) {
-           this.fieldToBeEdited = new Fielddef(-1, '', '', '', false, 0);
+           this.fieldToBeEdited = new Fielddef(-1, '', '', '', false, 0, '');
         }
+    }
+
+    onFiledTypeChange(event: Event) {
+        console.log( (<HTMLSelectElement>event.srcElement).value);
     }
 
     onAddField(addAnother: boolean) {
@@ -37,6 +41,7 @@ export class FieldDefinitionComponent implements OnInit {
             this.fieldAddForm.value.type,
             this.fieldAddForm.value.required,
             this.fieldAddForm.value.order,
+            this.fieldAddForm.value.options,
             );
         // console.log('The fields length is: ' + this.formdefService.forms[this.formId].fields.length);
         this.formdefService.addFielddef(this.formId, field);
