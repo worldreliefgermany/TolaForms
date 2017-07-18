@@ -24,12 +24,16 @@ export class FieldDefinitionComponent implements OnInit {
     ngOnInit() {
         this.formId = this.route.snapshot.params['id'];
         if (!this.hasOwnProperty('fieldToBeEdited') ) {
-           this.fieldToBeEdited = new Fielddef(-1, '', '', '', false, 0, '');
+           this.fieldToBeEdited = new Fielddef(-1, '', '', '', false, 0, null);
         }
     }
 
     onFiledTypeChange(event: Event) {
         console.log( (<HTMLSelectElement>event.srcElement).value);
+    }
+
+    onAddOption($event) {
+        console.log('adding option');
     }
 
     onAddField(addAnother: boolean) {

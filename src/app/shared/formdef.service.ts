@@ -14,9 +14,12 @@ export class FormdefService {
             isPublic: false,
             displayFields: true,
             fields: [
-                new Fielddef(1, 'name', 'What is your name?', 'text', true, 0),
-                new Fielddef(2, 'age', 'How old are you?', 'number', false, 1),
-                new Fielddef(3, 'gender', 'What is your gender?', 'text', true, 2),
+                new Fielddef(1, 'name', 'What is your name?', 'select', true, 0,
+                    [{'value': 'joe', 'displayText': 'Joe Schmoe'},
+                     {'value': 'bob', 'displayText': 'Bob Doe'}]
+                     ),
+                new Fielddef(2, 'age', 'How old are you?', 'number', false, 1, null),
+                new Fielddef(3, 'gender', 'What is your gender?', 'text', true, 2, null),
             ]
         },
         {
@@ -26,10 +29,10 @@ export class FormdefService {
             isPublic: true,
             displayFields: true,
             fields: [
-                new Fielddef(1, 'dob', 'Date of Birth', 'date', true, 0),
-                new Fielddef(2, 'dept', 'Department', 'number', false, 1),
-                new Fielddef(3, 'title', 'Title', 'text', true, 2),
-                new Fielddef(4, 'experience', 'What is your level of experience?', 'text', true, 3),
+                new Fielddef(1, 'dob', 'Date of Birth', 'date', true, 0, null),
+                new Fielddef(2, 'dept', 'Department', 'number', false, 1, null),
+                new Fielddef(3, 'title', 'Title', 'text', true, 2, null),
+                new Fielddef(4, 'experience', 'What is your level of experience?', 'text', true, 3, null),
             ]
         }
     ];
@@ -44,7 +47,7 @@ export class FormdefService {
         const url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/';
         const headers = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Token xxxxx'});
+            'Authorization': 'Token xxxxxx'});
         return this.http.post(url, this.forms[index], {headers: headers});
     }
 

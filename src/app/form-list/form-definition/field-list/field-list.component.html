@@ -4,14 +4,26 @@
     <li *ngFor="let field of fields; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dragData]="i" (onDropSuccess)="onDragAndDropFields($event)">
         <div class="row">
             <label for={{field.name}} class="col-sm-2 control-label">{{field.label}}</label>
+
             <div class="col-sm-9">
-                <input
-                    class="form-control"
-                    id="{{field.name}}"
-                    name="{{field.name}}"
-                    type="{{field.type}}"
-                    [attr.accept]="field.type === 'file' ? 'image/*' : null"
-                    placeholder="{{field.label}}">
+                <div *ngIf="field.type === 'select'; else regularField">
+
+                    <select id="type" class="form-control" name="type">
+                        <option *ngFor="let optn of field.options" value="{{ optn.value }}">
+                            {{ optn.displayText }}
+                        </option>
+                    </select>
+                </div>
+
+                <ng-template #regularField>
+                    <input
+                        class="form-control"
+                        id="{{field.name}}"
+                        name="{{field.name}}"
+                        type="{{field.type}}"
+                        [attr.accept]="field.type === 'file' ? 'image/*' : null"
+                        placeholder="{{field.label}}">
+                </ng-template>
 
                 <app-field-definition
                     [fieldToBeEdited]="field"

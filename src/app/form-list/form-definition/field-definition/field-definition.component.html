@@ -22,18 +22,37 @@
                     placeholder="Field Label"
                     [(ngModel)]="fieldToBeEdited.label">
             </div>
-            <div class="form-group">
-                <select id="type" class="form-control" name="type"
-                    [(ngModel)]="fieldToBeEdited.type"
-                    (change)="onFiledTypeChange($event)">
-                        <option value="text">Text</option>
-                        <option value="number">Number</option>
-                        <option value="date">Date</option>
-                        <option value="email">Email</option>
-                        <option value="url">URL</option>
-                        <option value="file">Image</option>
-                        <option value="select">Dropdown</option>
-                </select>
+
+            <div [ngStyle]="fieldToBeEdited.type === 'select'
+                    ? {'padding': '5px', 'border': '1px solid #ccc', 'border-radius': '5px'}
+                    : ''">
+                <div class="form-group">
+                    <select id="type" class="form-control" name="type"
+                        [(ngModel)]="fieldToBeEdited.type"
+                        (change)="onFiledTypeChange($event)">
+                            <option value="text">Text</option>
+                            <option value="number">Number</option>
+                            <option value="date">Date</option>
+                            <option value="email">Email</option>
+                            <option value="url">URL</option>
+                            <option value="file">Image</option>
+                            <option value="select">Dropdown</option>
+                    </select>
+                </div>
+
+                <div class="form-inline clearfix" *ngIf="fieldToBeEdited.type === 'select'">
+                    <div *ngFor="let optn of fieldToBeEdited.options">
+                        <div class="form-group">
+                            <label for="{{ optn.value}}">Display Text: </label>
+                            <input class="form-control" type="text" id="{{optn.value}}" value="{{ optn.displayText }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Value: </label>
+                            <input class="form-control" type="text" value="{{ optn.value }}">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary pull-right" (click)="onAddOption()">Add Option</button>
+                </div>
             </div>
 
             <div class="checkbox">
@@ -41,6 +60,7 @@
                     <input type="checkbox" name="required" [(ngModel)]="fieldToBeEdited.required"> Field required
                 </label>
             </div>
+
             <div class="clearfix">
                 <div class="pull-right" *ngIf="fieldToBeEdited.id === -1">
                     <button type="submit" class="btn btn-success">Add</button>

@@ -6,6 +6,6 @@ export class Fielddef {
         public type: string,
         public required: boolean,
         public order: number,
-        public options: string
+        public options: {value: string, displayText: string}[]
     ) {}
 }
