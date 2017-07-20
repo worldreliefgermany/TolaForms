@@ -28,8 +28,7 @@
                     : ''">
                 <div class="form-group">
                     <select id="type" class="form-control" name="type"
-                        [(ngModel)]="fieldToBeEdited.type"
-                        (change)="onFiledTypeChange($event)">
+                        [(ngModel)]="fieldToBeEdited.type">
                             <option value="text">Text</option>
                             <option value="number">Number</option>
                             <option value="date">Date</option>
@@ -40,18 +39,35 @@
                     </select>
                 </div>
 
-                <div class="form-inline clearfix" *ngIf="fieldToBeEdited.type === 'select'">
+                <div class="clearfix" *ngIf="fieldToBeEdited.type === 'select'">
                     <div *ngFor="let optn of fieldToBeEdited.options">
-                        <div class="form-group">
-                            <label for="{{ optn.value}}">Display Text: </label>
-                            <input class="form-control" type="text" id="{{optn.value}}" value="{{ optn.displayText }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Value: </label>
-                            <input class="form-control" type="text" value="{{ optn.value }}">
+                        <div class="row">
+                            <div class="form-group col-sm-5">
+                                <input class="form-control" type="text" id="{{optn.value}}" value="{{ optn.displayText }}">
+                            </div>
+                            <div class="form-group col-sm-5">
+                                <input class="form-control" type="text" value="{{ optn.value }}">
+                            </div>
+                            <div class="col-span-1">
+                                <a (click)="deleteOption()">
+                                    <span class="glyphicon glyphicon-trash" alt="Delete" aria-hidden="true" style="color: red;"></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary pull-right" (click)="onAddOption()">Add Option</button>
+                    <div class="row">
+                        <div class="form-group col-sm-5">
+                            <input class="form-control" type="text" [(ngModel)]="newOptionText" name="newOptionText" placeholder="New option's DisplayText">
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <input class="form-control" type="text" [(ngModel)]="newOptionValue" name="newOptionValue" placeholder="New option's value">
+                        </div>
+                        <div class="col-span-1">
+                            <a (click)="onAddOption()">
+                                <span class="glyphicon glyphicon-plus" alt="Add New" aria-hidden="true" style="color: green;"></span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
