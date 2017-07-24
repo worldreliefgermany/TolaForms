@@ -37,6 +37,13 @@ export class FieldDefinitionComponent implements OnInit {
         this.fieldAddForm.form.controls.newOptionText.setValue('');
     }
 
+    deleteOption(optn) {
+        const index = this.fieldToBeEdited.options.indexOf(optn, 0);
+        if (index > -1) {
+            this.fieldToBeEdited.options.splice(index, 1);
+        }
+    }
+
     onAddField(addAnother: boolean) {
         const newFieldId = this.formdefService.forms[this.formId].fields.length + 1;
         const field = new Fielddef(
