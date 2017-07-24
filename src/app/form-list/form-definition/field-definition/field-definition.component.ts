@@ -45,7 +45,7 @@ export class FieldDefinitionComponent implements OnInit {
             this.fieldAddForm.value.label,
             this.fieldAddForm.value.type,
             this.fieldAddForm.value.required,
-            this.fieldAddForm.value.order,
+            newFieldId,
             this.fieldToBeEdited.options,
             );
         // console.log('The fields length is: ' + this.formdefService.forms[this.formId].fields.length);
