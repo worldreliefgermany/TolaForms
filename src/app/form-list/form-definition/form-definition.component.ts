@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
+import { Response } from '@angular/http';
+
 import { FormdefService } from '../../shared/formdef.service';
 
 import { Fielddef } from '../../shared/fielddef.model';
@@ -21,15 +23,24 @@ export class FormDefinitionComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private formdefService: FormdefService ) { }
+                private formdefService: FormdefService) { }
 
     ngOnInit() {
-        this.formId = this.route.snapshot.params['id'];
-        if (this.formId) {
-            this.fields = this.formdefService.forms[this.formId].fields;
-            this.formdata = this.formdefService.forms[this.formId];
-        } else {
-            this.formdata = {id: -1, name: '', description: '', isPublic: false, fields: this.fields};
+        if (!this.formId) {
+            this.formdefService.fetchForms().subscribe(
+                (response: Response) => {
+                    this.formdefService.forms = response.json();
+                    this.formId = this.route.snapshot.params['id'];
+
+                    if (this.formId) {
+                        this.fields = this.formdefService.forms[this.formId].fields;
+                        this.formdata = this.formdefService.forms[this.formId];
+                    } else {
+                        this.formdata = {id: -1, name: '', description: '', isPublic: false, fields: this.fields};
+                    }
+                },
+                (error) => { console.log(error)},
+            );
         }
     }
 

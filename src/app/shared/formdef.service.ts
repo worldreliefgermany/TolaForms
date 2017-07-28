@@ -1,43 +1,81 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import 'rxjs/Rx';
 
 import { Fielddef } from './fielddef.model';
 
 @Injectable()
 export class FormdefService {
 
-    forms = [
-        {
-            id: 1,
-            name: 'My Test Form 1',
-            description: 'This the description for form # 1',
-            isPublic: false,
-            displayFields: true,
-            fields: [
-                new Fielddef(1, 'name', 'What is your name?', 'select', true, 0,
-                    [{'value': 'joe', 'displayText': 'Joe Schmoe'},
-                     {'value': 'bob', 'displayText': 'Bob Doe'}]
-                     ),
-                new Fielddef(2, 'age', 'How old are you?', 'number', false, 1, null),
-                new Fielddef(3, 'gender', 'What is your gender?', 'text', true, 2, null),
-            ]
-        },
-        {
-            id: 2,
-            name: 'Your Test Form 2',
-            description: 'This is some description for why this form exists',
-            isPublic: true,
-            displayFields: true,
-            fields: [
-                new Fielddef(1, 'dob', 'Date of Birth', 'date', true, 0, null),
-                new Fielddef(2, 'dept', 'Department', 'number', false, 1, null),
-                new Fielddef(3, 'title', 'Title', 'text', true, 2, null),
-                new Fielddef(4, 'experience', 'What is your level of experience?', 'text', true, 3, null),
-            ]
-        }
-    ];
+    forms = [];
+
+    //     {
+    //         id: 1,
+    //         name: 'My Test Form 1',
+    //         description: 'This the description for form # 1',
+    //         isPublic: false,
+    //         displayFields: true,
+    //         fields: [
+    //             new Fielddef(1, 'name', 'What is your name?', 'select', true, 0,
+    //                 [{'value': 'joe', 'displayText': 'Joe Schmoe'},
+    //                  {'value': 'bob', 'displayText': 'Bob Doe'}]
+    //                  ),
+    //             new Fielddef(2, 'age', 'How old are you?', 'number', false, 1, null),
+    //             new Fielddef(3, 'gender', 'What is your gender?', 'text', true, 2, null),
+    //         ]
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Your Test Form 2',
+    //         description: 'This is some description for why this form exists',
+    //         isPublic: true,
+    //         displayFields: true,
+    //         fields: [
+    //             new Fielddef(1, 'dob', 'Date of Birth', 'date', true, 0, null),
+    //             new Fielddef(2, 'dept', 'Department', 'number', false, 1, null),
+    //             new Fielddef(3, 'title', 'Title', 'text', true, 2, null),
+    //             new Fielddef(4, 'experience', 'What is your level of experience?', 'text', true, 3, null),
+    //         ]
+    //     }
+    // ];
 
     constructor(private http: Http) {}
+
+    getForms() {
+        this.fetchForms().subscribe(
+            (response: Response) => { this.forms = response.json(); },
+            (error) => { console.log(error)},
+        );
+
+        // const data = Observable.interval(1000); // emit data every second
+        // data.subscribe(
+        //     (number: number) => console.log('data received' + number),
+        // );
+        const myObservable = Observable.create( (observer: Observer<string>) => {
+            setTimeout( () => {
+                observer.next('first package');
+            }, 2000);
+            setTimeout( () => {
+                observer.next('second package');
+            }, 4000);
+            setTimeout( () => {
+                // observer.next('this does not work');
+                observer.complete();
+            }, 5000);
+            setTimeout( () => {
+                observer.next('third package');
+            }, 6000);
+        });
+
+        myObservable.subscribe(
+            (data: string) => { console.log(data); },
+            (error: string) => { console.log(error); },
+            () => { console.log('completed'); }
+        )
+    }
 
     // http://dev-v2.tolaactivity.app.tola.io/api/fieldtype/
     // http://dev-v2.tolaactivity.app.tola.io/api/customformfield/
@@ -47,8 +85,22 @@ export class FormdefService {
         const url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/';
         const headers = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Token xxxxxx'});
+            'Authorization': 'Token xxx'});
         return this.http.post(url, this.forms[index], {headers: headers});
+    }
+
+    fetchForms() {
+        const url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/?format=json';
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Token xxx'});
+        return this.http.get(url, {headers: headers});
+        /*.subscribe(
+            (response: Response) => { this.forms = response.json(); },
+            (error) => { console.log(error)},
+        );
+        return this.forms;
+        */
     }
 
     addFormdef(name: string, description: string, isPublic: boolean, fields: Fielddef[]) {

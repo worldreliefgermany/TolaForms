@@ -13,6 +13,7 @@
                         [(ngModel)]="fieldToBeEdited.name">
                 </div>
             </div>
+
             <div class="form-group">
                 <input
                     type="text"
@@ -23,9 +24,12 @@
                     [(ngModel)]="fieldToBeEdited.label">
             </div>
 
+            <!-- If the field being displayed is a dropdown then draw a rectangular border around it -->
             <div [ngStyle]="fieldToBeEdited.type === 'select'
                     ? {'padding': '5px', 'border': '1px solid #ccc', 'border-radius': '5px'}
                     : ''">
+
+                <!-- Display the field type as the selected option from the "type" select element -->
                 <div class="form-group">
                     <select id="type" class="form-control" name="type"
                         [(ngModel)]="fieldToBeEdited.type">
@@ -39,7 +43,9 @@
                     </select>
                 </div>
 
-                <div class="clearfix" *ngIf="fieldToBeEdited.type === 'select'">
+                <!-- If the field type is a dropdown then show the select options -->
+                <div *ngIf="fieldToBeEdited.type === 'select'">
+
                     <div *ngFor="let optn of fieldToBeEdited.options">
                         <div class="row">
                             <div class="form-group col-sm-5">
@@ -55,6 +61,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Form for adding new options to the dropdown field -->
                     <div class="row">
                         <div class="form-group col-sm-5">
                             <input class="form-control" type="text" [(ngModel)]="newOptionText" name="newOptionText" placeholder="New option's DisplayText">
@@ -68,6 +76,7 @@
                             </a>
                         </div>
                     </div>
+
                 </div>
             </div>
 

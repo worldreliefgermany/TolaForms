@@ -38,7 +38,7 @@ const appRoutes: Routes =  [
     DndModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [FormdefService],
+  providers: [FormdefService, FormdefService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
