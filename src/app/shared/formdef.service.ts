@@ -11,6 +11,10 @@ import { Fielddef } from './fielddef.model';
 export class FormdefService {
 
     forms = [];
+    api_url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/';
+    headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Token xxx'});
 
     //     {
     //         id: 1,
@@ -82,25 +86,23 @@ export class FormdefService {
     // http://dev-v2.tolaactivity.app.tola.io/api/customform/
 
     saveFormRemotely(index: number) {
-        const url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/';
-        const headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': 'Token xxx'});
-        return this.http.post(url, this.forms[index], {headers: headers});
+        // const url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/';
+        return this.http.post(this.api_url, this.forms[index], {headers: this.headers});
     }
 
     fetchForms() {
-        const url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/?format=json';
-        const headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': 'Token xxx'});
-        return this.http.get(url, {headers: headers});
+        // const url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/?format=json';
+        return this.http.get(this.api_url, {headers: this.headers});
         /*.subscribe(
             (response: Response) => { this.forms = response.json(); },
             (error) => { console.log(error)},
         );
         return this.forms;
         */
+    }
+
+    fetchForm(id: number) {
+        return this.http.get(this.api_url + id + '/', {headers: this.headers});
     }
 
     addFormdef(name: string, description: string, isPublic: boolean, fields: Fielddef[]) {

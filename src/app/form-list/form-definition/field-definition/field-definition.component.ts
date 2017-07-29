@@ -68,6 +68,7 @@ export class FieldDefinitionComponent implements OnInit {
         this.fieldToBeEdited['required'] = this.fieldAddForm.value.required;
         this.fieldToBeEdited['order'] = this.fieldAddForm.value.order;
         this.fieldToBeEdited['id'] = this.fieldToBeEdited.id;
+        this.fieldToBeEdited['options'] = this.fieldToBeEdited.options;
         this.formdefService.updateFielddef(this.formId, this.fieldToBeEdited.id, this.fieldToBeEdited);
         this.displayEditForm.emit(false);
         // TODO: Make a call to the server to update it remotely as well

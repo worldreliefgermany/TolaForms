@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Formdef } from '../shared/formdef.model';
@@ -15,10 +16,12 @@ import { FormdefService } from '../shared/formdef.service';
 export class FormListComponent implements OnInit {
     forms: Formdef[] = [];
 
-    constructor(private formsService: FormdefService) { }
+    constructor(private router: Router, private route: ActivatedRoute, private formsService: FormdefService) { }
 
     ngOnInit() {
-        if (this.forms.length <= 0) {
+        /*
+        if (this.formsService.forms.length <= 0) {
+            console.log('fetching forms from formlist view');
             this.formsService.fetchForms().subscribe(
                 (response: Response) => {
                     this.formsService.forms = response.json();
@@ -26,9 +29,13 @@ export class FormListComponent implements OnInit {
                 },
                 (error) => { console.log(error)},
             );
-
+        }
+        this.forms = this.formsService.forms;
+        */
+        if (this.forms.length <= 0 ) {
+            this.forms = this.route.snapshot.data['forms'].json();
+        } else {
             this.forms = this.formsService.forms;
         }
     }
-
 }

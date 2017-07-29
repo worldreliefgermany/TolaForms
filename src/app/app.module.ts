@@ -14,12 +14,14 @@ import { FormListComponent } from './form-list/form-list.component';
 
 import { FormdefService } from './shared/formdef.service';
 import { FieldListComponent } from './form-list/form-definition/field-list/field-list.component';
+import { FormlistResolve } from './form-list/form-list-resolve';
+import { FormResolve } from './form-list/form-definition/form-definition-resolve';
 
 const appRoutes: Routes =  [
-  { path: '', component: FormListComponent},
+  { path: '', component: FormListComponent, resolve: { forms: FormlistResolve }},
   { path: 'forms', component: FormListComponent},
   { path: 'forms/newform', component: FormDefinitionComponent},
-  { path: 'forms/:id', component: FormDefinitionComponent },
+  { path: 'forms/:id', component: FormDefinitionComponent, resolve: { forms: FormResolve } },
 ];
 
 @NgModule({
@@ -38,7 +40,7 @@ const appRoutes: Routes =  [
     DndModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [FormdefService, FormdefService],
+  providers: [FormdefService, FormdefService, FormlistResolve, FormResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

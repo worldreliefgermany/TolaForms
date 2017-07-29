@@ -13,7 +13,7 @@
                 class="form-control"
                 id="name"
                 name ="name"
-                [(ngModel)]="formdata.name"
+                [(ngModel)]="form.name"
                 placeholder="Enter the name of the form"
                 required>
         </div>
@@ -23,7 +23,7 @@
                 class="form-control"
                 id="description"
                 name="description"
-                [(ngModel)]="formdata.description"
+                [(ngModel)]="form.description"
                 placeholder="Enter a brief description of the form."
                 rows="5">
             </textarea>
@@ -31,7 +31,7 @@
 
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="isPublic" [(ngModel)]="formdata.isPublic"> Make it public
+                <input type="checkbox" name="isPublic" [(ngModel)]="form.isPublic"> Make it public
             </label>
         </div>
 
@@ -40,9 +40,9 @@
 
 <app-field-list
     (fieldlist)="updateFieldList($event)"
-    [fields]="formdata.fields"
+    [fields]="form.fields"
     [edit_mode]="true"
-    *ngIf="formdata.fields.length>0">
+    *ngIf="form.fields.length>0">
     <p class="hrtext"><span>List of Fields</span></p>
 </app-field-list>
 <hr >
