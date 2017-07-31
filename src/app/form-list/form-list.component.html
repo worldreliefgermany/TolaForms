@@ -1,4 +1,4 @@
-<div class="panel panel-default" *ngFor="let form of forms">
+<div class="panel panel-default" *ngFor="let form of formsService.forms">
     <div class="panel-heading clearfix">
         <a [routerLink]="['/forms', form.id ]">{{ form.name }}</a>
         <button

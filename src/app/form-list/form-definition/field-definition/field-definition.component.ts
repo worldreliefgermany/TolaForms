@@ -19,7 +19,7 @@ export class FieldDefinitionComponent implements OnInit {
     @Input() fieldToBeEdited: Fielddef;
 
     constructor(private route: ActivatedRoute,
-                private formdefService: FormdefService) { }
+                private formsService: FormdefService) { }
 
     ngOnInit() {
         this.formId = this.route.snapshot.params['id'];
@@ -45,18 +45,17 @@ export class FieldDefinitionComponent implements OnInit {
     }
 
     onAddField(addAnother: boolean) {
-        const newFieldId = this.formdefService.forms[this.formId].fields.length + 1;
+
         const field = new Fielddef(
-            newFieldId,
+            null, // id is assigned by the server (api endpoint)
             this.fieldAddForm.value.name,
             this.fieldAddForm.value.label,
             this.fieldAddForm.value.type,
             this.fieldAddForm.value.required,
-            newFieldId,
+            0, // field's 'order' is handled in the form service class.
             this.fieldToBeEdited.options,
             );
-        // console.log('The fields length is: ' + this.formdefService.forms[this.formId].fields.length);
-        this.formdefService.addFielddef(this.formId, field);
+        this.formsService.addFielddef(this.formId, field);
         this.fieldAddForm.reset();
         this.displayAddForm.emit(addAnother);
     }
@@ -69,7 +68,7 @@ export class FieldDefinitionComponent implements OnInit {
         this.fieldToBeEdited['order'] = this.fieldAddForm.value.order;
         this.fieldToBeEdited['id'] = this.fieldToBeEdited.id;
         this.fieldToBeEdited['options'] = this.fieldToBeEdited.options;
-        this.formdefService.updateFielddef(this.formId, this.fieldToBeEdited.id, this.fieldToBeEdited);
+        this.formsService.updateFielddef(this.formId, this.fieldToBeEdited.id, this.fieldToBeEdited);
         this.displayEditForm.emit(false);
         // TODO: Make a call to the server to update it remotely as well
     }

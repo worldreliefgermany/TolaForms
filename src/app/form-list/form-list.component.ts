@@ -14,9 +14,12 @@ import { FormdefService } from '../shared/formdef.service';
   encapsulation: ViewEncapsulation.None // Do not encapsulate css rules; propagate it to other comps.
 })
 export class FormListComponent implements OnInit {
-    forms: Formdef[] = [];
+    // forms: Formdef[] = [];
 
-    constructor(private router: Router, private route: ActivatedRoute, private formsService: FormdefService) { }
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private formsService: FormdefService) { }
 
     ngOnInit() {
         /*
@@ -32,10 +35,11 @@ export class FormListComponent implements OnInit {
         }
         this.forms = this.formsService.forms;
         */
-        if (this.forms.length <= 0 ) {
-            this.forms = this.route.snapshot.data['forms'].json();
-        } else {
-            this.forms = this.formsService.forms;
-        }
+        // if (this.forms.length <= 0 ) {
+            // this.forms = this.route.snapshot.data['forms'].json();
+            this.formsService.forms = this.route.snapshot.data['forms'].json();
+        // } else {
+        //     this.forms = this.formsService.forms;
+        // }
     }
 }

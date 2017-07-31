@@ -86,12 +86,10 @@ export class FormdefService {
     // http://dev-v2.tolaactivity.app.tola.io/api/customform/
 
     saveFormRemotely(index: number) {
-        // const url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/';
         return this.http.post(this.api_url, this.forms[index], {headers: this.headers});
     }
 
     fetchForms() {
-        // const url = 'http://dev-v2.tolaactivity.app.tola.io/api/customform/?format=json';
         return this.http.get(this.api_url, {headers: this.headers});
         /*.subscribe(
             (response: Response) => { this.forms = response.json(); },
@@ -109,14 +107,29 @@ export class FormdefService {
         this.forms.push({id: null, name: name, description: description, isPublic: isPublic, displayFields: true, fields: fields});
     }
 
+    getForm(id: number) {
+        /*
+        return Observable.create(observer => {
+          setTimeout(() => {
+            observer.next(this.forms.find((form) => form.id === id))
+            observer.complete();
+          }, 3000);
+        });
+        */
+        return this.forms.find((form) => form.id === Number(id));
+    }
 
     updateFormdef( id: number, name: string, description: string, isPublic: boolean, fields: Fielddef[]) {
         this.forms[id] = {id: id, name: name, description: description, isPublic: isPublic, displayFields: true, fields: fields};
     }
 
     addFielddef(id: number, fielddef: Fielddef) {
-        fielddef.order = this.forms[id].fields.length;
-        this.forms[id].fields.push(fielddef);
+        if (this.getForm(id).fields) {
+            fielddef.order = this.getForm(id).fields.length;
+            this.getForm(id).fields.push(fielddef);
+        } else {
+            this.getForm(id).fields = [fielddef];
+        }
     }
 
 

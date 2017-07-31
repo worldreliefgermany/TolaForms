@@ -17,7 +17,8 @@ import { Formdef } from '../../shared/formdef.model';
 export class FormDefinitionComponent implements OnInit {
     @ViewChild('f') formdef: NgForm;
     formId: number;
-    form: Formdef = {id: -1, name: '', description: '', isPublic: false, fields: [], };
+    // form: Formdef = {id: -1, name: '', description: '', isPublic: false, fields: [], };
+    // form: Formdef;
     displayAddFieldForm = false;
 
     constructor(private router: Router,
@@ -45,25 +46,28 @@ export class FormDefinitionComponent implements OnInit {
             }
         }
         */
-        this.form = this.route.snapshot.data['forms'].json();
+        // this.form = this.route.snapshot.data['forms'].json();
+        this.formId = this.route.snapshot.data['forms'].json().id;
     }
 
     onSubmitForm() {
+        console.log('this.formId: ' + this.formId);
         if (this.formId) {
             this.formdefService.updateFormdef(
                 this.formId,
                 this.formdef.value.name,
                 this.formdef.value.description,
                 this.formdef.value.isPublic,
-                this.form.fields
+                this.formdefService.getForm(this.formId).fields
             );
         } else {
             this.formdefService.addFormdef(
                 this.formdef.value.name,
                 this.formdef.value.description,
                 this.formdef.value.isPublic,
-                this.form.fields
+                this.formdefService.getForm(this.formId).fields
             );
+            console.log(this.formdefService.getForm(this.formId).fields);
             this.formId = this.formdefService.forms.length - 1;
         }
         this.router.navigate(['/forms', this.formId]);
@@ -82,7 +86,7 @@ export class FormDefinitionComponent implements OnInit {
     }
 
     updateFieldList($event: any) {
-        this.form.fields = $event;
+        this.formdefService.getForm(this.formId).fields = $event;
         this.onSubmitForm();
     }
 

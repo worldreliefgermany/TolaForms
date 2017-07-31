@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Fielddef } from '../../../shared/fielddef.model';
+import { FormdefService } from '../../../shared/formdef.service';
 
 @Component({
   selector: 'app-field-list',
@@ -14,7 +15,7 @@ export class FieldListComponent implements OnInit {
     @Input() edit_mode = false;
     fieldIndexToEdit: boolean;
 
-    constructor() { }
+    constructor(private formsService: FormdefService) { }
 
     ngOnInit() {
     }
