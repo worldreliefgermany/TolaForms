@@ -7,7 +7,10 @@
     </div>
     <div class="panel-body">
         <p>{{ form.description }}</p>
-        <app-field-list [fields]="form.fields" [ngClass]="{hide_element: form.displayFields}" *ngIf="(form.fields != null && form.fields.length>0)">
+        <app-field-list
+            [formId]="form.id"
+            [ngClass]="{hide_element: !form.displayFields}"
+            *ngIf="(form.fields != null && form.fields.length>0)">
             <p class="hrtext"><span>List of Fields</span></p>
         </app-field-list>
     </div>

@@ -1,12 +1,12 @@
 <ng-content></ng-content>
 
-<ul class="list-group" dnd-sortable-container [sortableData]="fields">
-    <li *ngFor="let field of fields; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dragData]="i" (onDropSuccess)="onDragAndDropFields($event)">
+<ul class="list-group" dnd-sortable-container [sortableData]="formsService.getForm(formId)?.fields">
+    <li *ngFor="let field of formsService.getForm(formId)?.fields; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dragData]="i" (onDropSuccess)="onDragAndDropFields($event)">
         <div class="row">
             <label for={{field.name}} class="col-sm-2 control-label">{{field.label}}</label>
 
             <div class="col-sm-9">
-                <!-- If the field type 'select' then show select element otherwise jump to the 'regularField' -->
+                <!-- If the field type is 'select' then show select element otherwise jump to the 'regularField' -->
                 <div *ngIf="field.type === 'select'; else regularField">
 
                     <select id="type" class="form-control" name="type">

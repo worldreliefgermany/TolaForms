@@ -14,33 +14,38 @@ import { FormListComponent } from './form-list/form-list.component';
 
 import { FormdefService } from './shared/formdef.service';
 import { FieldListComponent } from './form-list/form-definition/field-list/field-list.component';
-import { FormlistResolve } from './form-list/form-list-resolve';
+import { FormlistResolve } from './app.resolve';
 import { FormResolve } from './form-list/form-definition/form-definition-resolve';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes =  [
-  { path: '', component: FormListComponent, resolve: { forms: FormlistResolve }},
-  { path: 'forms', component: FormListComponent},
-  { path: 'forms/newform', component: FormDefinitionComponent},
-  { path: 'forms/:id', component: FormDefinitionComponent, resolve: { forms: FormResolve } },
-];
+    { path: '', redirectTo: '/forms', pathMatch: 'full'},
+    { path: '', component: HomeComponent, resolve: { forms: FormlistResolve},
+    children: [
+        { path: 'forms', component: FormListComponent },
+        { path: 'forms/newform', component: FormDefinitionComponent},
+        { path: 'forms/:id', component: FormDefinitionComponent }
+    ],
+}];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FieldDefinitionComponent,
-    FormDefinitionComponent,
-    FormListComponent,
-    FieldListComponent,
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    DndModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
-  ],
-  providers: [FormdefService, FormdefService, FormlistResolve, FormResolve],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FieldDefinitionComponent,
+        FormDefinitionComponent,
+        FormListComponent,
+        FieldListComponent,
+        HomeComponent,
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        DndModule.forRoot(),
+        RouterModule.forRoot(appRoutes)
+    ],
+    providers: [FormdefService, FormdefService, FormlistResolve, FormResolve],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
